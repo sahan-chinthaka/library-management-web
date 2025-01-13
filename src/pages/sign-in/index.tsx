@@ -9,9 +9,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { signInFormSchema } from "@/lib/schema";
+import { api } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { z } from "zod";
 
 function SignInPage() {
@@ -22,9 +25,28 @@ function SignInPage() {
       password: "",
     },
   });
+  const [disabled, setDisabled] = useState(false);
+  const navigate = useNavigate();
 
   function onSubmit(values: z.infer<typeof signInFormSchema>) {
-    console.log(values);
+    setDisabled(true);
+    api
+      .post("/api/Auth/signin", values)
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        toast("Sign in successful", {
+          type: "success",
+        });
+        navigate("/");
+      })
+      .catch((e) => {
+        setDisabled(false);
+        if (e.status == 401)
+          toast("Invalid credentials", {
+            type: "error",
+          });
+        else toast(e.message, { type: "error" });
+      });
   }
 
   return (
@@ -63,7 +85,7 @@ function SignInPage() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full" disabled={disabled}>
               Sign in
             </Button>
             <p>
