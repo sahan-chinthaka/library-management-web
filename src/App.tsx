@@ -1,15 +1,13 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import HomePage from "./pages/index.js";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePage />,
-  },
-]);
+import { Outlet } from "react-router-dom";
+import NavBar from "./components/nav-bar.js";
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <NavBar />
+      <Outlet />
+    </>
+  );
 }
 
 export default App;
