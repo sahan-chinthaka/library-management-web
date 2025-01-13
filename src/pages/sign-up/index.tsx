@@ -9,9 +9,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { signUpFormSchema } from "@/lib/schema";
+import { api } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { z } from "zod";
 
 function SignUpPage() {
@@ -23,9 +26,23 @@ function SignUpPage() {
       passwordConfirm: "",
     },
   });
+  const [disabled, setDisabled] = useState(false);
+  const navigate = useNavigate();
 
   function onSubmit(values: z.infer<typeof signUpFormSchema>) {
-    console.log(values);
+    setDisabled(true);
+    api
+      .post("/api/Auth/signup", values)
+      .then(() => {
+        toast("User registered successfully", { type: "success" });
+        navigate("/sign-in");
+      })
+      .catch((e) => {
+        setDisabled(false);
+        if (e.status == 409)
+          toast("Username already exists", { type: "error" });
+        else toast(e.message, { type: "error" });
+      });
   }
 
   return (
@@ -77,7 +94,7 @@ function SignUpPage() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full" disabled={disabled}>
               Sign up
             </Button>
             <p>
