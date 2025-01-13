@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 function NavBar() {
   return (
-    <header className="m-2 rounded bg-gray-200 p-5 flex items-baseline">
+    <header className="flex items-baseline border-b bg-white p-5">
       <nav>
         <ul className="flex gap-2">
           <li>
@@ -14,7 +14,9 @@ function NavBar() {
           </li>
         </ul>
       </nav>
-      <Button className="ml-auto">Sign in</Button>
+      <Link to="/sign-in" className="ml-auto">
+        <Button>Sign in</Button>
+      </Link>
     </header>
   );
 }
