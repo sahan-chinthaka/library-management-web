@@ -67,6 +67,44 @@
   }
 
   h1 {
-    @apply text-primary text-3xl font-bold;
+    @apply text-3xl font-bold text-primary;
+  }
+
+  h2 {
+    @apply text-xl font-bold text-primary;
+  }
+
+  .loader {
+    width: 15px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    animation: l5 1s infinite linear alternate;
+  }
+
+  @keyframes l5 {
+    0% {
+      box-shadow:
+        20px 0 hsl(345, 100%, 33%, 1),
+        -20px 0 hsl(345, 100%, 33%, 0.13);
+      background: hsl(345, 100%, 33%, 1);
+    }
+    33% {
+      box-shadow:
+        20px 0 hsl(345, 100%, 33%, 1),
+        -20px 0 hsl(345, 100%, 33%, 0.13);
+      background: hsl(345, 100%, 33%, 0.13);
+    }
+    66% {
+      box-shadow:
+        20px 0 hsl(345, 100%, 33%, 0.13),
+        -20px 0 hsl(345, 100%, 33%, 1);
+      background: hsl(345, 100%, 33%, 0.13);
+    }
+    100% {
+      box-shadow:
+        20px 0 hsl(345, 100%, 33%, 0.13),
+        -20px 0 hsl(345, 100%, 33%, 1);
+      background: hsl(345, 100%, 33%, 1);
+    }
   }
 }

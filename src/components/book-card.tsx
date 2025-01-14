@@ -2,8 +2,8 @@ import { IBook } from "../lib/types";
 
 function BookCard({ data }: { data: IBook }) {
   return (
-    <div className="m-5 w-40 rounded border p-5 shadow">
-      <h1>{data.name}</h1>
+    <div className="w-40 rounded border bg-white p-5 shadow">
+      <h2>{data.name}</h2>
     </div>
   );
 }
