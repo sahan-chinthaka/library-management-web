@@ -1,13 +1,28 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/auth-context";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 function NavBar() {
   const location = useLocation();
   const [show, setShow] = useState(false);
   const [auth, authAction] = useAuth();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        show &&
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
+        setShow(false);
+      }
+    }
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [show]);
 
   return (
     <header className="flex h-[76px] items-baseline border-b bg-white p-5">
@@ -44,7 +59,7 @@ function NavBar() {
         </Link>
       )}
       {auth && (
-        <div className="relative ml-auto">
+        <div ref={containerRef} className="relative ml-auto">
           <button
             onClick={() => setShow((a) => !a)}
             className="size-9 items-center justify-center rounded-full bg-primary text-center leading-9 text-white"
@@ -56,7 +71,13 @@ function NavBar() {
               <div className="border-b bg-gray-100 p-4 text-left">
                 {auth.username}
               </div>
-              <Button onClick={() => authAction.signOut()} className="m-4">
+              <Button
+                onClick={() => {
+                  setShow(false);
+                  authAction.signOut();
+                }}
+                className="m-4"
+              >
                 Sign out
               </Button>
             </div>
