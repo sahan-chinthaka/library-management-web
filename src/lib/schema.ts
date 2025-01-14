@@ -28,3 +28,10 @@ export const signUpFormSchema = z
       });
     }
   });
+
+export const newBookFormSchema = z.object({
+  name: z.string().trim().min(2, "Name must be at least 2 characters."),
+  author: z.string().trim().min(2, "Author must be at least 2 characters."),
+  description: z.string().optional(),
+  publisher: z.string().optional(),
+});

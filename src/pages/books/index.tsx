@@ -7,6 +7,7 @@ import { IBook } from "@/lib/types";
 import { api } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import NewBook from "./new-book";
 
 function BooksPage() {
   const [searchParams] = useSearchParams();
@@ -16,12 +17,15 @@ function BooksPage() {
   const query = searchParams.get("q");
   const [auth] = useAuth();
 
-  useEffect(() => {
+  function update() {
     setBooks(undefined);
     api.get(`/api/Books?name=${query ?? ""}`).then((res) => {
       setBooks(res.data);
     });
-  }, [query]);
+    console.log("Update");
+  }
+
+  useEffect(update, [query]);
 
   function search() {
     if (!inputRef.current) return;
@@ -33,22 +37,18 @@ function BooksPage() {
   }
 
   return (
-    <div className="px-5">
+    <div className="px-5 sm:px-20">
       <div className="container mx-auto">
         <div>
           {auth !== undefined && (
-            <div className="mx-auto mt-5 max-w-[700px] rounded border border-primary p-5 shadow md:mt-10 bg-white">
+            <div className="mx-auto mt-5 max-w-[700px] rounded border border-primary bg-white p-5 shadow md:mt-10">
               <h2>Are interested in publishing a book?</h2>
               <p className="my-4 text-gray-700">
                 {auth == null
                   ? "To publish a book, you should sign in here"
                   : "You can publish any book here"}
               </p>
-              {auth !== null && (
-                <Link to="/books/new-book">
-                  <Button>Publish a Book</Button>
-                </Link>
-              )}
+              {auth !== null && <NewBook update={update} />}
               {auth == null && (
                 <Link to="/sign-in">
                   <Button>Sign in</Button>
@@ -74,14 +74,14 @@ function BooksPage() {
           </div>
         )}
         {books && books.length > 0 && (
-          <div className="mt-5 md:mt-10 flex">
+          <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-10 md:grid-cols-3 lg:grid-cols-4">
             {books.map((book) => (
               <BookCard key={book.id} data={book} />
             ))}
           </div>
         )}
         {books && books.length == 0 && (
-          <div className="mt-32 space-y-8">
+          <div className="mt-16 space-y-8">
             <img src={NotFound} className="mx-auto w-32" />
             <p className="text-center text-primary">Not found any results</p>
           </div>
