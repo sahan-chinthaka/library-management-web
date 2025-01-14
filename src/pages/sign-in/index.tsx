@@ -7,10 +7,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { useAuth } from "@/hooks/auth-context";
 import { signInFormSchema } from "@/lib/schema";
 import { api } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -27,6 +28,7 @@ function SignInPage() {
   });
   const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
+  const [_, authAction] = useAuth();
 
   function onSubmit(values: z.infer<typeof signInFormSchema>) {
     setDisabled(true);
@@ -37,6 +39,7 @@ function SignInPage() {
         toast("Sign in successful", {
           type: "success",
         });
+        authAction.refresh();
         navigate("/");
       })
       .catch((e) => {
