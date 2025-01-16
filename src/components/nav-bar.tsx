@@ -25,7 +25,7 @@ function NavBar() {
   }, [show]);
 
   return (
-    <header className="flex h-[76px] items-baseline border-b bg-white p-5">
+    <header className="flex h-[76px] items-center border-b bg-white p-5">
       <nav>
         <ul className="flex gap-4">
           <li>
