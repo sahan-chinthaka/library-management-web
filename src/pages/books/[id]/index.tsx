@@ -1,11 +1,11 @@
 import Photo from "@/assets/sample-book.webp";
-import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/auth-context";
 import { IBookWithUser } from "@/lib/types";
 import { api } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import DeleteBook from "./delete-book";
 import EditBook from "./edit-book";
 
 function SingleBookViewPage() {
@@ -76,7 +76,7 @@ function SingleBookViewPage() {
         </table>
         {auth?.id === book.user.id && (
           <div className="mt-10 space-x-2">
-            <Button variant="outline">Delete</Button>
+            <DeleteBook id={book.id} />
             <EditBook book={book} update={update} />
           </div>
         )}
