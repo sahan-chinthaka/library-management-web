@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import NavBar from "./components/nav-bar.js";
 import { useAuth } from "./hooks/auth-context.js";
+import Footer from "./components/footer.js";
 
 function App() {
   const [auth] = useAuth();
@@ -19,6 +20,7 @@ function App() {
     <>
       <NavBar />
       <Outlet />
+      <Footer />
       <ToastContainer
         position="bottom-right"
         autoClose={2000}
