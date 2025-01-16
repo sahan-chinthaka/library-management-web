@@ -42,11 +42,11 @@ function BooksPage() {
         <div>
           {auth !== undefined && (
             <div className="mx-auto mt-5 max-w-[700px] rounded border border-primary bg-white p-5 shadow md:mt-10">
-              <h2>Are interested in publishing a book?</h2>
+              <h2>Are you interested in uploading a book?</h2>
               <p className="my-4 text-gray-700">
                 {auth == null
-                  ? "To publish a book, you should sign in here"
-                  : "You can publish any book here"}
+                  ? "To upload a book, you should sign in here"
+                  : "You can upload any book here"}
               </p>
               {auth !== null && <NewBook update={update} />}
               {auth == null && (

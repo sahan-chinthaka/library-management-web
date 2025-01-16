@@ -48,11 +48,11 @@ function NewBook({ update }: { update: () => void }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button onClick={() => setOpen(true)}>Publish a Book</Button>
+        <Button onClick={() => setOpen(true)}>Upload a Book</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Publish a Book</DialogTitle>
+          <DialogTitle>Upload a Book</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -146,7 +146,7 @@ function NewBook({ update }: { update: () => void }) {
                   type="submit"
                   className="ml-auto block"
                 >
-                  Publish
+                  Upload
                 </Button>
               </div>
             </div>
