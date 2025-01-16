@@ -8,6 +8,7 @@ import BooksPage from "./pages/books/index.tsx";
 import HomePage from "./pages/index.tsx";
 import SignInPage from "./pages/sign-in/index.tsx";
 import SignUpPage from "./pages/sign-up/index.tsx";
+import SingleBookViewPage from "./pages/books/[id]/index.tsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "books",
         element: <BooksPage />,
+      },
+      {
+        path: "books/:id",
+        element: <SingleBookViewPage />,
       },
     ],
   },

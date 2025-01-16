@@ -7,3 +7,10 @@ export interface IBook {
   createdDate: Date;
   publisher?: string;
 }
+
+export interface IBookWithUser extends IBook {
+  user: {
+    id: number;
+    username: string;
+  };
+}
