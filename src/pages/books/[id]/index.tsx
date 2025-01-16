@@ -6,13 +6,14 @@ import { api } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import EditBook from "./edit-book";
 
 function SingleBookViewPage() {
   const [book, setBook] = useState<IBookWithUser>();
   const { id } = useParams();
   const [auth] = useAuth();
 
-  useEffect(() => {
+  function update() {
     api
       .get(`/api/Books/${id}`)
       .then((res) => {
@@ -23,7 +24,9 @@ function SingleBookViewPage() {
         if (e.status == 404) toast(`No book with id: ${id}`, { type: "error" });
         else toast(e.message, { type: "error" });
       });
-  }, [id]);
+  }
+
+  useEffect(update, [id]);
 
   if (!book) {
     return (
@@ -74,7 +77,7 @@ function SingleBookViewPage() {
         {auth?.id === book.user.id && (
           <div className="mt-10 space-x-2">
             <Button variant="outline">Delete</Button>
-            <Button>Edit</Button>
+            <EditBook book={book} update={update} />
           </div>
         )}
       </div>
