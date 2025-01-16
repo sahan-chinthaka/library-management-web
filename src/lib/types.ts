@@ -6,6 +6,7 @@ export interface IBook {
   imageURl?: string;
   createdDate: Date;
   publisher?: string;
+  userId?: number;
 }
 
 export interface IBookWithUser extends IBook {
