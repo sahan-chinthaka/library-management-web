@@ -6,6 +6,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export async function sleep(time: number) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
 export const api = axios.create({
   baseURL: "http://localhost:5127",
   headers: {
