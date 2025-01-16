@@ -15,6 +15,7 @@ import { api } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { z } from "zod";
 
 function NewBook({ update }: { update: () => void }) {
@@ -39,10 +40,12 @@ function NewBook({ update }: { update: () => void }) {
         createdDate: new Date().toISOString(),
       })
       .then(() => {
-        setDisabled(false);
         setOpen(false);
         update();
-      });
+        toast("Book uploaded", { type: "success" });
+      })
+      .catch((e) => toast(e.message))
+      .finally(() => setDisabled(false));
   }
 
   return (
