@@ -1,50 +1,79 @@
-# React + TypeScript + Vite
+# Library Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application for managing books and users in a library system. Built with React, TypeScript, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- User authentication (sign up/sign in)
+- Book management (add, edit, delete, search)
+- Dashboard with statistics
+- Responsive design
+- Real-time book filtering
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [Node.js](https://nodejs.org/) (version 18 or higher)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+1. Clone the repository:
+
+```bash
+git clone https://github.com/sahan-chinthaka/library-management-web.git
+cd library-management-web
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Install dependencies:
 
-```js
-// eslint.config.js
-import react from "eslint-plugin-react";
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: "18.3" } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs["jsx-runtime"].rules,
-  },
-});
+```bash
+npm install
 ```
+
+3. Update the `.env` file in the root directory with API's URL:
+
+```env
+VITE_PUBLIC_API_URL=http://localhost:5127
+```
+
+4. Start the development server:
+
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:5173`
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run lint` - Run ESLint
+- `npm run preview` - Preview production build
+
+## Tech Stack
+
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [React Router](https://reactrouter.com/)
+- [React Hook Form](https://react-hook-form.com/)
+- [Axios](https://axios-http.com/)
+- [shadcn](https://ui.shadcn.com/)
+
+## Project Structure
+
+```
+src/
+  ├── assets/      # Static assets
+  ├── components/  # React components
+  │   ├── ui/     # UI components
+  │   └── ...
+  ├── hooks/      # Custom React hooks
+  ├── lib/        # Utilities, types, schemas
+  ├── pages/      # Page components
+  └── main.tsx    # Application entry point
+```
+
+
+© 2025 Library Management. All rights reserved.
