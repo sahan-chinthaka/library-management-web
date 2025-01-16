@@ -11,7 +11,7 @@ export async function sleep(time: number) {
 }
 
 export const api = axios.create({
-  baseURL: "http://localhost:5127",
+  baseURL: import.meta.env.VITE_PUBLIC_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
